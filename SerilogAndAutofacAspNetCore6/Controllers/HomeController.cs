@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SerilogAndAutofacAspNetCore6.Models;
+using SerilogAndAutofacAspNetCore6.Services;
 using System.Diagnostics;
 
 namespace SerilogAndAutofacAspNetCore6.Controllers
@@ -7,10 +8,12 @@ namespace SerilogAndAutofacAspNetCore6.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly TestService _testService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, TestService testService)
         {
             _logger = logger;
+            _testService = testService;
         }
 
         public IActionResult Index()

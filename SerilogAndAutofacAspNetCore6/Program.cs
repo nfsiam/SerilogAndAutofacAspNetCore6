@@ -1,7 +1,17 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using SerilogAndAutofacAspNetCore6;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+        .ConfigureContainer<ContainerBuilder>(builder =>
+        {
+            builder.RegisterModule(new WebModule());
+        });
 
 var app = builder.Build();
 
